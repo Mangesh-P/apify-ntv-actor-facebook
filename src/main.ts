@@ -37,7 +37,7 @@ try {
     const input = await Actor.getInput<IInput>();
 
     if (!input) throw new Error("Input is missing!");
-    const { url } = input;
+    const { url, proxy } = input;
     // const url = 'https://www.facebook.com/MazdaUSA/photos/a.429757820362/10167170515805363';
 
     if (!validateFacebookUrl(url)) {

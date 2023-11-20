@@ -9,7 +9,7 @@ Change the input as needed.
 {
     "url": "https://nativo.com",
     "proxy": {
-        "useApifyProxy": false
+        "useApifyProxy": true
     }
 }
 
