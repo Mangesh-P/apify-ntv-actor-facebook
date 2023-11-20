@@ -1,5 +1,5 @@
 {
-    "title": "PlaywrightCrawler Template",
+    "title": "Apify Ntv Actor Facebook",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
@@ -9,6 +9,13 @@
             "description": "What URL you want to take screenshot of.",
             "editor": "textfield",
             "prefill": "https://www.apify.com/"
+        },
+        "proxy": {
+            "title": "Proxy configuration",
+            "type": "object",
+            "description": "Select proxies to be used by your crawler.",
+            "prefill": { "useApifyProxy": true },
+            "editor": "proxy"
         }
     },
     "required": ["url"]
