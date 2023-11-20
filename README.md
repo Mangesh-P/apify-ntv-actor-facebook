@@ -6,6 +6,7 @@ For complete information [see this article](https://docs.apify.com/platform/acto
 For input add below in "storage/key_value_stores/default/INPUT.json"
 Change the input as needed.
 
+```
 {
     "url": "https://nativo.com",
     "proxy": {
@@ -13,13 +14,15 @@ Change the input as needed.
     }
 }
 
-
-After successful running the output can be found in 
-"storage/key_value_stores/default/OUTPUT.json"
+```
+Run the below command
 
 ```
 apify run
 ```
+
+The output can be found in 
+"storage/key_value_stores/default/OUTPUT.json"
 
 ## Deploy to Apify
 
