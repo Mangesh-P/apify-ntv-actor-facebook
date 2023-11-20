@@ -2,6 +2,21 @@
 
 For complete information [see this article](https://docs.apify.com/platform/actors/development#build-actor-locally). To run the actor use the following command: run apify locally
 
+
+For input add below in "storage/key_value_stores/default/INPUT.json"
+Change the input as needed.
+
+{
+    "url": "https://nativo.com",
+    "proxy": {
+        "useApifyProxy": false
+    }
+}
+
+
+After successful running the output can be found in 
+"storage/key_value_stores/default/OUTPUT.json"
+
 ```
 apify run
 ```
