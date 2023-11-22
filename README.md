@@ -1,6 +1,6 @@
 ## Getting started
 
-For complete information [see this article](https://docs.apify.com/platform/actors/development#build-actor-locally). To run the actor use the following command: run apify locally
+For complete information [see this article](https://docs.apify.com/platform/actors/development#build-actor-locally). To run the actor locally use the following command:
 
 
 For input add below in "storage/key_value_stores/default/INPUT.json"

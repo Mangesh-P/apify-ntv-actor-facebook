@@ -1,7 +1,7 @@
 import { Actor, log } from 'apify';
 import { Page } from 'playwright';
 
-const { ACTOR_DEFAULT_KEY_VALUE_STORE_ID } = process.env;
+const { ACTOR_DEFAULT_DATASET_ID, ACTOR_DEFAULT_KEY_VALUE_STORE_ID } = process.env;
 
 export const FB_ASSET_TYPE = {
     POST: 'post',
@@ -136,7 +136,6 @@ export function getAssetTypeFromUrl(url: string) {
 export async function saveOutput(
     images: string[],
     text: string | null | undefined,
-    key = 'OUTPUT',
 ) {
     log.info(`Total images Extracted - ${images.length}`);
     images.forEach((img: string) => {
@@ -147,12 +146,14 @@ export async function saveOutput(
     }
 
     log.info(
-        `https://api.apify.com/v2/key-value-stores/${ACTOR_DEFAULT_KEY_VALUE_STORE_ID}/records/OUTPUT?disableRedirect=true`,
+        `https://api.apify.com/v2/datasets/${ACTOR_DEFAULT_DATASET_ID}/items?clean=true&format=json`,
     );
-    return await Actor.setValue(key, {
+    const item = {
         images,
         text,
-    });
+    };
+
+    return await Actor.pushData(item);
 }
 
 export async function saveError(errorMessage: any, key = 'ERROR') {
@@ -160,5 +161,10 @@ export async function saveError(errorMessage: any, key = 'ERROR') {
     log.info(
         `https://api.apify.com/v2/key-value-stores/${ACTOR_DEFAULT_KEY_VALUE_STORE_ID}/records/ERROR?disableRedirect=true`,
     );
+    log.info(
+        `https://api.apify.com/v2/datasets/${ACTOR_DEFAULT_DATASET_ID}/items?clean=true&format=json`,
+    );
+
+    await Actor.pushData(errorMessage);
     return await Actor.setValue(key, errorMessage);
 }
