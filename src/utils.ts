@@ -138,7 +138,10 @@ export async function saveOutput(
     text: string | null | undefined,
 ) {
     log.info(`Total images Extracted - ${images.length}`);
+    const tempImageObj: { url: string }[] = [];
+
     images.forEach((img: string) => {
+        tempImageObj.push({ url: img });
         log.info(`Image - ${img}`);
     });
     if (text) {
@@ -149,7 +152,7 @@ export async function saveOutput(
         `https://api.apify.com/v2/datasets/${ACTOR_DEFAULT_DATASET_ID}/items?clean=true&format=json`,
     );
     const item = {
-        images,
+        tempImageObj,
         text,
     };
 
@@ -158,9 +161,6 @@ export async function saveOutput(
 
 export async function saveError(errorMessage: any, key = 'ERROR') {
     log.error(JSON.stringify(errorMessage));
-    log.info(
-        `https://api.apify.com/v2/key-value-stores/${ACTOR_DEFAULT_KEY_VALUE_STORE_ID}/records/ERROR?disableRedirect=true`,
-    );
     log.info(
         `https://api.apify.com/v2/datasets/${ACTOR_DEFAULT_DATASET_ID}/items?clean=true&format=json`,
     );
