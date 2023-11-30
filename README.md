@@ -1,5 +1,7 @@
 ## Getting started
 
+Use Node Version - 18.17.1 and above
+
 For complete information [see this article](https://docs.apify.com/platform/actors/development#build-actor-locally). To run the actor locally use the following command:
 
 
