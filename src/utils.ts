@@ -159,12 +159,20 @@ export async function saveOutput(
     return await Actor.pushData(item);
 }
 
-export async function saveError(errorMessage: any, key = 'ERROR') {
-    log.error(JSON.stringify(errorMessage));
+export async function saveError(message: string, trace: string, key = 'ERROR') {
+    log.error(message);
+    log.error(trace);
     log.info(
         `https://api.apify.com/v2/datasets/${ACTOR_DEFAULT_DATASET_ID}/items?clean=true&format=json`,
     );
+    log.info(
+        `https://api.apify.com/v2/key-value-stores/${ACTOR_DEFAULT_KEY_VALUE_STORE_ID}/records/ERROR?disableRedirect=true`,
+    );
 
-    await Actor.pushData(errorMessage);
-    return await Actor.setValue(key, errorMessage);
+    const errMsg = {
+        message,
+        trace,
+    };
+    await Actor.pushData(errMsg);
+    return await Actor.setValue(key, errMsg);
 }

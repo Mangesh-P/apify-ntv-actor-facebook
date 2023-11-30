@@ -10,7 +10,7 @@ Change the input as needed.
 
 ```
 {
-    "url": "https://nativo.com",
+    "url": "https://www.facebook.com/MazdaUSA/videos/1546904879146503/",
     "proxy": {
         "useApifyProxy": true
     }

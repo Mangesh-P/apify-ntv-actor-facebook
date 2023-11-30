@@ -57,7 +57,7 @@ try {
         proxyUrl,
         launchOptions: {
             devtools: false,
-            headless: true,
+            headless: false,
         },
     });
     if (browser) {
@@ -106,9 +106,8 @@ try {
     } else {
         throw new Error('Browser is not defined');
     }
-} catch (error) {
-    await saveError(error);
+} catch (error: any) {
+    await saveError(error.message, error.stack);
 } finally {
-    // Exit successfully
-    await Actor.exit();
+    await Actor.exit('Execution finished!');
 }
