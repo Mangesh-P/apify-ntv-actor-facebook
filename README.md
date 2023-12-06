@@ -39,9 +39,11 @@ If you've created a Git repository for the project, you can easily connect to Ap
 
 You can also deploy the project on your local machine to Apify without the need for the Git repository.
 
-1. Log in to Apify. You will need to provide your [Apify API Token](https://console.apify.com/account/integrations) to complete this action.
+1. Log in to Apify. You will need to provide your [Apify API Token](https://console.apify.com/account/integrations) to complete this action.(you need apify-cli)
 
     ```
+    sudo npm -g install apify-cli
+
     apify login
     ```
 
