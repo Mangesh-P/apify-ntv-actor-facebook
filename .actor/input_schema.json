@@ -14,7 +14,7 @@
             "title": "Proxy configuration",
             "type": "object",
             "description": "Select proxies to be used by your crawler.",
-            "prefill": { "useApifyProxy": true },
+            "prefill": { "useApifyProxy": false }, 
             "editor": "proxy"
         }
     },

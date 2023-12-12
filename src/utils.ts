@@ -134,14 +134,14 @@ export function getAssetTypeFromUrl(url: string) {
 }
 
 export async function saveOutput(
-    images: string[],
+    imagesArr: string[],
     text: string | null | undefined,
 ) {
-    log.info(`Total images Extracted - ${images.length}`);
-    const tempImageObj: { url: string }[] = [];
+    log.info(`Total images Extracted - ${imagesArr.length}`);
+    const images: { url: string }[] = [];
 
-    images.forEach((img: string) => {
-        tempImageObj.push({ url: img });
+    imagesArr.forEach((img: string) => {
+        images.push({ url: img });
         log.info(`Image - ${img}`);
     });
     if (text) {
@@ -151,8 +151,9 @@ export async function saveOutput(
     log.info(
         `https://api.apify.com/v2/datasets/${ACTOR_DEFAULT_DATASET_ID}/items?clean=true&format=json`,
     );
+    // dataset need to store {images , text } format to be read by admin.
     const item = {
-        tempImageObj,
+        images,
         text,
     };
 
