@@ -23,8 +23,8 @@ export async function injectFacebookEmbedIframe(
 ) {
     const { iframeId = 'ntv-fb-iframe', url = '' } = opts;
 
-    const width = '700';
-    const height = '700';
+    const width = '500';
+    const height = '371';
 
     // Determine whether it's a post or a video.
     const assetType = getAssetTypeFromUrl(url);
@@ -60,6 +60,7 @@ export async function injectFacebookEmbedIframe(
 
             iframe.style.border = 'none';
             iframe.style.overflow = 'hidden';
+            // iframe.sandbox.add('allow-scripts');
 
             // log.info(`Prepending iframe to body`);
 
@@ -160,9 +161,13 @@ export async function saveOutput(
     return await Actor.pushData(item);
 }
 
-export async function saveError(message: string, trace: string, key = 'ERROR') {
+export async function saveError(error: any, key = 'ERROR') {
+    const { message, trace, status, statusText } = error;
     log.error(message);
     log.error(trace);
+    log.error(status);
+    log.error(statusText);
+
     log.info(
         `https://api.apify.com/v2/datasets/${ACTOR_DEFAULT_DATASET_ID}/items?clean=true&format=json`,
     );

@@ -46,6 +46,7 @@ try {
 
     const proxyConfiguration = await Actor.createProxyConfiguration({
         useApifyProxy: true,
+        password: 'apify_proxy_XELIGyEF3K64VaBh1XGlj1KXOvXFUJ20a1Bo',
         ...proxy,
     });
 
@@ -75,7 +76,7 @@ try {
         });
 
         // Use a random timeout to help with bot detection
-        await page.waitForTimeout(3000);
+        await page.waitForTimeout(2000);
 
         // Get content from injected facebook iframe
         const iframeContent = await getIframe(page, IFRAME_ID);
@@ -92,6 +93,15 @@ try {
                 },
             );
 
+            const video: string[] = await iframeContent.$$eval(
+                'video',
+                (videos: any[]) => {
+                    return videos.map((vid: any) => vid.src);
+                },
+            );
+
+            log.info('Video', video);
+
             const text = await iframeContent.evaluate(
                 () => document.querySelector('p')?.textContent,
             );
@@ -107,7 +117,8 @@ try {
         throw new Error('Browser is not defined');
     }
 } catch (error: any) {
-    await saveError(error.message, error.stack);
+    await saveError(error);
+    await Actor.fail('Execution failed!');
 } finally {
     await Actor.exit('Execution finished!');
 }
